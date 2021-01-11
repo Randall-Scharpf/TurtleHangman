@@ -1,7 +1,7 @@
 # BEGIN CODE OUTLINE
 
 # find a word that the player will guess
-def get_word(is_multiplayer):
+def get_word(is_multiplayer, length):
     if (is_multiplayer):
         while True:
             word = request_word()
@@ -11,9 +11,8 @@ def get_word(is_multiplayer):
                 break
             wipe_shown_word()
     else:
-        length = ask_number_letters()
         while (len(word) != length):
-            word = pick_random_word()
+            word = pick_random_word(length)
     return word
 
 # run a full game from start to finish
@@ -59,7 +58,10 @@ draw_hanger()
 
 # determine initial mode to play in
 multiplayer_mode = ask_if_multiplayer()
-
+length = 0
+if (not multiplayer_mode):
+    length = ask_number_letters()
+    
 while(True):
     
     # play game
@@ -72,6 +74,8 @@ while(True):
     # change settings for next round
     if (change_settings()):
         multiplayer_mode = ask_if_multiplayer()
+        if (not multiplayer_mode):
+            length = ask_number_letters()
 
 # game is stopped, close application
 exit
