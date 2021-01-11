@@ -1,5 +1,6 @@
 import turtle as trtl
 hangman=trtl.Turtle()
+hangman.ht()
 times_wrong=1
 if times_wrong == 1:
     hangman.penup()
