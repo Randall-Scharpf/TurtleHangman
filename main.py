@@ -5,7 +5,7 @@ if times_wrong == 1:
     hangman.penup()
     hangman.goto(-100,100)
     hangman.pendown()
-    hangman.circle(50)
+    hangman.circle(20)
     times_wrong+=1
 if times_wrong == 2:
     hangman.right(90)
@@ -32,6 +32,5 @@ if times_wrong == 6:
     hangman.right(130)
     hangman.forward(20)
 #too lazy to do eyes for now
-wn = trtl.Screen()
-wn.mainloop()
+
 
