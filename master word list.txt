@@ -50,7 +50,6 @@ base
 basin
 basket
 bath
-be
 beautiful
 because
 bed
