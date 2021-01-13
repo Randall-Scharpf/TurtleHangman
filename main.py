@@ -1,4 +1,7 @@
-# BEGIN CODE OUTLINE
+from console import request_word, ask_for_confirmation, ask_for_guess, player_one_wins, player_two_wins, you_lose, you_win
+from console import ask_if_multiplayer, ask_number_letters, play_again, change_settings
+from graphics import display_word, wipe_shown_word, setup_game, draw_body_part, add_to_red_list, fill_in_letter_at, draw_hanger
+from list_reader import pick_random_word
 
 # find a word that the player will guess
 def get_word(is_multiplayer, length):
@@ -11,16 +14,31 @@ def get_word(is_multiplayer, length):
                 break
             wipe_shown_word()
     else:
-        while (len(word) != length):
+        while (length > 0 and len(word) != length):
             word = pick_random_word(length)
     return word
 
+letters_is_known = []
+def fill_in_letter(letter, word):
+    for index in [pos for pos, char in enumerate(word) if char == letter]:
+        fill_in_letter_at(index, letter)
+        letters_is_known[index] = True
+
+def word_guessed():
+    for b in letters_is_known:
+        if not b:
+            return False
+    return True
+
 # run a full game from start to finish
-def play_game(multiplayer_mode):
-    word = get_word(multiplayer_mode)
+def play_game(multiplayer_mode, length):
+    letters_is_known = []
+    word = get_word(multiplayer_mode, length)
+    for i in range(len(word)):
+        letters_is_known.append(' ' == word[i])
     
     # setup board
-    setup_game(len(word))
+    setup_game(word)
     
     # ask for letters
     incorrect_guesses = 0
@@ -35,7 +53,7 @@ def play_game(multiplayer_mode):
             incorrect_guesses = incorrect_guesses + 1
         else:
             # correct
-            fill_in_letter(letter)
+            fill_in_letter(letter, word)
         
         # end conditions
 
@@ -65,12 +83,14 @@ if (not multiplayer_mode):
 while(True):
     
     # play game
-    play_game(multiplayer_mode)
+    play_game(multiplayer_mode, length)
 
     # ask if want to play again
     if (not play_again()):
         break
 
+    wipe_shown_word()
+    
     # change settings for next round
     if (change_settings()):
         multiplayer_mode = ask_if_multiplayer()
@@ -79,44 +99,3 @@ while(True):
 
 # game is stopped, close application
 exit
-
-# END CODE OUTLINE
-
-# BEGIN JACOB'S DRAWING CODE
-
-import turtle as trtl
-hangman=trtl.Turtle()
-times_wrong=1
-if times_wrong == 1:
-    hangman.penup()
-    hangman.goto(-100,100)
-    hangman.pendown()
-    hangman.circle(20)
-    times_wrong+=1
-if times_wrong == 2:
-    hangman.right(90)
-    hangman.forward(30)
-    times_wrong+=1
-if times_wrong == 3:
-    hangman.right(30)
-    hangman.forward(20)
-    times_wrong+=1
-if times_wrong == 4:
-    hangman.goto(-100,70)
-    hangman.left(60)
-    hangman.forward(20)
-    times_wrong+=1
-if times_wrong == 5:
-    hangman.penup()
-    hangman.goto(-100,90)
-    hangman.pendown()
-    hangman.left(40)
-    hangman.forward(20)
-    times_wrong+=1
-if times_wrong == 6:
-    hangman.goto(-100,90)
-    hangman.right(130)
-    hangman.forward(20)
-#too lazy to do eyes for now
-
-
