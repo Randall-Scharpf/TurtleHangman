@@ -10,25 +10,39 @@ def okay_to_confirm():
 def ask_for_confirmation():
     print ("TODO")
 
+letters_already_guessed = []
 # asks for a letter guess and returns it
 def ask_for_guess():
-    print ("TODO")
+    while True:
+        line = input("Enter a letter to guess: ")
+        letter = line.strip().upper()
+        if (len(letter) != 1):
+            print ("Enter exactly one letter.")
+            continue
+        if (letter in letters_already_guessed):
+            print ("You've already guessed that letter! Come up with a different one.")
+            continue
+        if (not letter.isalpha()):
+            print ("That's not a letter! Enter one letter, from A to Z.")
+            continue
+        letters_already_guessed.append(letter)
+        return letter
 
 # tells the first player (s)he won
 def player_one_wins():
-    print ("TODO")
+    print ("Player 1 wins! Stellar deductions.")
 
 # tells the second player (s)he won
 def player_two_wins():
-    print ("TODO")
+    print ("Player 2 wins! What a tricky word!")
 
 # tells the player (s)he lost to the computer
 def you_lose() :
-    print ("TODO")
+    print ("You lose! Better luck next time.")
 
 # tells the player (s)he defeated the computer
 def you_win():
-    print ("TODO")
+    print ("You win! Stellar deductions.")
 
 # asks if two or one players will be playing, and returns the boolean answer
 def ask_if_multiplayer():
@@ -57,6 +71,7 @@ def ask_number_letters():
 
 # asks if the user wants to play again or if they would like to exit and returns the boolean answer
 def play_again():
+    letters_already_guessed.clear()
     while True:
         line = input("Would you like to play again? (yes/no)")
         if (line.strip() == "yes"):
