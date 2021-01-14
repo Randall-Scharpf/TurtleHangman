@@ -2,7 +2,11 @@
 def request_word():
     print ("TODO")
 
-# asks whether the word shown is correct or not and returns it
+# asks whether or not it is okay to display the word to confirm it was typed correctly and returns yes if it is
+def okay_to_confirm():
+    print ("TODO")
+
+# asks whether the word shown is correct or not and returns yes if it is correct
 def ask_for_confirmation():
     print ("TODO")
 
