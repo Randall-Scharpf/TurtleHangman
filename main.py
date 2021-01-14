@@ -1,5 +1,5 @@
 from console import request_word, ask_for_confirmation, ask_for_guess, player_one_wins, player_two_wins, you_lose, you_win
-from console import ask_if_multiplayer, ask_number_letters, play_again, change_settings
+from console import ask_if_multiplayer, ask_number_letters, play_again, change_settings, okay_to_confirm
 from graphics import display_word, wipe_shown_word, setup_game, draw_body_part, add_to_red_list, fill_in_letter_at, draw_hanger
 from list_reader import pick_random_word
 
@@ -8,6 +8,8 @@ def get_word(is_multiplayer, length):
     if (is_multiplayer):
         while True:
             word = request_word()
+            if(not okay_to_confirm()):
+                break
             display_word(word)
             if(ask_for_confirmation()):
                 wipe_shown_word()
