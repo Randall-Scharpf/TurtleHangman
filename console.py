@@ -1,14 +1,35 @@
 # asks for player two's word to be guessed and returns it
 def request_word():
-    print ("TODO")
+    while True:
+        line = input("Pick a word for the other player to try to guess: ")
+        i = 0
+        for c in line:
+            if (c.isalpha()):
+                i = i + 1
+        if (i > 3):
+            return line
+        else:
+            print("There must be at least 3 letters in your word! Type a new word.")
 
 # asks whether or not it is okay to display the word to confirm it was typed correctly and returns yes if it is
 def okay_to_confirm():
-    print ("TODO")
+    while True:
+        line = input("Would you like to confirm that your word was typed correctly? (yes/no) ")
+        if (line.strip() == "yes"):
+            return True
+        if (line.strip() == "no"):
+            return False
+        print("You must answer with either \"yes\" or \"no\".")
 
 # asks whether the word shown is correct or not and returns yes if it is correct
 def ask_for_confirmation():
-    print ("TODO")
+    while True:
+        line = input("Is the word you see the word you typed? (yes/no) ")
+        if (line.strip() == "yes"):
+            return True
+        if (line.strip() == "no"):
+            return False
+        print("You must answer with either \"yes\" or \"no\".")
 
 letters_already_guessed = []
 # asks for a letter guess and returns it
@@ -47,7 +68,7 @@ def you_win():
 # asks if two or one players will be playing, and returns the boolean answer
 def ask_if_multiplayer():
     while True:
-        line = input("Enter the number of players (1 or 2):")
+        line = input("Enter the number of players (1 or 2): ")
         if (line.strip() == "1"):
             return False
         if (line.strip() == "2"):
@@ -57,7 +78,7 @@ def ask_if_multiplayer():
 # requests the integer number of letters that is the length of the random word and returns it or zero (if length is to be unspecified)
 def ask_number_letters():
     while True:
-        line = input("Enter the length of the word to guess, or \"any\" if you would like it to be randomized.")
+        line = input("Enter the length of the word to guess, or \"any\" if you would like it to be randomized: ")
         if (line.strip() == "any"):
             return 0
         try:
@@ -73,7 +94,7 @@ def ask_number_letters():
 def play_again():
     letters_already_guessed.clear()
     while True:
-        line = input("Would you like to play again? (yes/no)")
+        line = input("Would you like to play again? (yes/no) ")
         if (line.strip() == "yes"):
             return True
         if (line.strip() == "no"):
@@ -83,7 +104,7 @@ def play_again():
 # asks if the player would like to use the same settings as the last game and returns the boolean answer
 def change_settings():
     while True:
-        line = input("Would you like to change the game settings? (yes/no)")
+        line = input("Would you like to change the game settings? (yes/no) ")
         if (line.strip() == "yes"):
             return True
         if (line.strip() == "no"):

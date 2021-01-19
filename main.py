@@ -9,20 +9,26 @@ def get_word(is_multiplayer, length):
         while True:
             word = request_word()
             if(not okay_to_confirm()):
-                break
+                return word
             display_word(word)
             if(ask_for_confirmation()):
                 wipe_shown_word()
-                break
+                return word
             wipe_shown_word()
     else:
-        while (length > 0 and len(word) != length):
-            word = pick_random_word(length)
-    return word
+        while True:
+            word = pick_random_word()
+            i = 0
+            for c in word:
+                if (c.isalpha()):
+                    i = i + 1
+            if (length <= 0 or i == length):
+                return word
 
 letters_is_known = []
+
 def fill_in_letter(letter, word):
-    for index in [pos for pos, char in enumerate(word) if char == letter]:
+    for index in [pos for pos, char in enumerate(word) if char.lower() == letter.lower()]:
         fill_in_letter_at(index, letter)
         letters_is_known[index] = True
 
@@ -34,21 +40,22 @@ def word_guessed():
 
 # run a full game from start to finish
 def play_game(multiplayer_mode, length):
-    letters_is_known = []
+    letters_is_known.clear()
     word = get_word(multiplayer_mode, length)
-    for i in range(len(word)):
-        letters_is_known.append(' ' == word[i])
+    length = len(word)
+    for i in range(length):
+        letters_is_known.append(not word[i].isalpha())
     
     # setup board
     setup_game(word)
-    
+
     # ask for letters
     incorrect_guesses = 0
     while (True):
         letter = ask_for_guess()
 
         # deal with a guess
-        if (letter not in word):
+        if (not letter.lower() in word.lower()):
             # incorrect
             draw_body_part(incorrect_guesses)
             add_to_red_list(incorrect_guesses)
@@ -56,7 +63,16 @@ def play_game(multiplayer_mode, length):
         else:
             # correct
             fill_in_letter(letter, word)
-        
+
+        # DEBUGGING, TO BE REMOVED
+        status = "REMOVE THIS ONCE INTERFACE IS DONE | "
+        for x in range(length):
+            if letters_is_known[x]:
+                status = status + word[x]
+            else:
+                status = status + "_"
+        print(status)
+
         # end conditions
 
         if (incorrect_guesses == 8):
