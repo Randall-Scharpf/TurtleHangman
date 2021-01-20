@@ -29,7 +29,7 @@ letters_is_known = []
 
 def fill_in_letter(letter, word):
     for index in [pos for pos, char in enumerate(word) if char.lower() == letter.lower()]:
-        fill_in_letter_at(index, letter)
+        fill_in_letter_at(index, letter, word)
         letters_is_known[index] = True
 
 def word_guessed():

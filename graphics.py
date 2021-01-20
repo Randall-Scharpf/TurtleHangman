@@ -31,12 +31,12 @@ def setup_game(word):
     letters = list(word)
     i = 0
     for letter in letters:
-        if i + 1 == len(word):
+        if i == len(word):
             return
         if not letter.isalpha():
             writer.penup()
             writer.forward(30)
-            fill_in_letter_at(i, letter)
+            fill_in_letter_at(i, letter, word)
         else:
             writer.pendown()
             writer.forward(20)
@@ -82,7 +82,7 @@ def add_to_red_list(letter):
     writer.write(letter)
 
 # draws the letter on the space with the index requested
-def fill_in_letter_at(i, letter):
+def fill_in_letter_at(i, letter, word):
     writer.penup()
     writer.goto(-15 * len(word) - 5,-150)
     writer.pendown()
