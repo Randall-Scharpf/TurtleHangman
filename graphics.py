@@ -1,30 +1,37 @@
 import turtle as trtl
 hangman=trtl.Turtle()
 hangman.ht()
+writer=trtl.Turtle()
+writer.ht()
 # draw the blank lines, the spaces between them, and the letters for the word instructed
 def display_word(word):
-    print("TODO")
+    for i in letters_is_known:
+        writer.pencolor("black")
+        writer.penup()
+        writer.setpos(-15*length, -150)
+        writer.pendown()
+        writer.write(i)
 
 # erase the blank lines, any letters atop them, and any body parts or red letters drawn
 def wipe_shown_word():
     hangman.clear()
+    writer.clear()
     draw_hanger()
 
 # draw the blank lines and the spaces between them for the word instructed
 def setup_game(word):
-    hangman.penup()
-    hangman.goto(-15*value,-150)
-    hangman.seth(0)
-    letters = list(word)
-    for letter in letters:
-        if letter == (" "):
-            hangman.penup()
-            hangman.forward(30)
+    writer.penup()
+    writer.goto(-15*length,-150)
+    writer.seth(0)
+    for i in letters_is_known:
+        if i == (" "):
+            writer.penup()
+            writer.forward(30)
         else:
-            hangman.penup()
-            hangman.forward(10)
-            hangman.pendown()
-            hangman.forward(20)
+            writer.penup()
+            writer.forward(10)
+            writer.pendown()
+            writer.forward(20)
 
 # draws the part of the hangman representing the ith wrong guess, from zero
 def draw_body_part(i):
@@ -56,10 +63,10 @@ def draw_body_part(i):
 
 # draws the letter with the other red, incorrect, used letters
 def add_to_red_list(letter):
-    hangman.penup()
-    hangman.pencolor("red")
-    hangman.setpos(-200/times_wrong, 0)
-    hangman.write(letter)
+    writer.penup()
+    writer.pencolor("red")
+    writer.setpos(-200/incorrect_guesses, 0)
+    writer.write(letter)
 
 
 # draws the letter on the space with the index requested
