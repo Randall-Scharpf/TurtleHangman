@@ -1,7 +1,8 @@
 import turtle as trtl
 writer=trtl.Turtle()
+hangman=trtl.Turtle()
 writer.ht()
-
+hangman.ht()
 # draw the blank lines, the spaces between them, and the letters for the word instructed
 def display_word(word):
     letters = list(word)
@@ -45,30 +46,30 @@ def setup_game(word):
 # draws the part of the writer representing the ith wrong guess, from zero
 def draw_body_part(i):
     if i == 1:
-        writer.penup()
-        writer.goto(-100,100)
-        writer.pendown()
-        writer.circle(50)
+        hangman.penup()
+        hangman.goto(-100,100)
+        hangman.pendown()
+        hangman.circle(50)
     if i == 2:
-        writer.right(90)
-        writer.forward(30)
+        hangman.right(90)
+        hangman.forward(30)
     if i == 3:
-        writer.right(30)
-        writer.forward(20)
+        hangman.right(30)
+        hangman.forward(20)
     if i == 4:
-        writer.goto(-100,70)
-        writer.left(60)
-        writer.forward(20)
+        hangman.goto(-100,70)
+        hangman.left(60)
+        hangman.forward(20)
     if i == 5:
-        writer.penup()
-        writer.goto(-100,90)
-        writer.pendown()
-        writer.left(40)
-        writer.forward(20)
+        hangman.penup()
+        hangman.goto(-100,90)
+        hangman.pendown()
+        hangman.left(40)
+        hangman.forward(20)
     if i == 6:
-        writer.goto(-100,90)
-        writer.right(130)
-        writer.forward(20)
+        hangman.goto(-100,90)
+        hangman.right(130)
+        hangman.forward(20)
 
 # draws the letter with the other red, incorrect, used letters
 def add_to_red_list(letter):
@@ -85,15 +86,16 @@ def fill_in_letter_at(i, letter):
 
 # opens the interface and draws the initial picture, which is just a place to hang the man
 def draw_hanger():
-    writer.penup()
-    writer.setpos(-150,0)
-    writer.pendown()
-    writer.seth(0)
-    writer.forward(200)
-    writer.setpos(0,0)
-    writer.seth(90)
-    writer.forward(250)
-    writer.seth(180)
-    writer.forward(100)
-    writer.seth(270)
-    writer.forward(50)
+    hangman.pencolor("black")
+    hangman.penup()
+    hangman.setpos(-150,0)
+    hangman.pendown()
+    hangman.seth(0)
+    hangman.forward(200)
+    hangman.setpos(0,0)
+    hangman.seth(90)
+    hangman.forward(250)
+    hangman.seth(180)
+    hangman.forward(100)
+    hangman.seth(270)
+    hangman.forward(50)
