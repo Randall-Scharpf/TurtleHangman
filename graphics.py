@@ -5,7 +5,9 @@ writer=trtl.Turtle()
 writer.ht()
 # draw the blank lines, the spaces between them, and the letters for the word instructed
 def display_word(word):
-    for i in letters_is_known:
+    letters = list(word)
+    length=len(word)
+    for i in letters:
         writer.pencolor("black")
         writer.penup()
         writer.setpos(-15*length, -150)
@@ -20,18 +22,20 @@ def wipe_shown_word():
 
 # draw the blank lines and the spaces between them for the word instructed
 def setup_game(word):
+    letters = list(word)
+    length = len(word)
     writer.penup()
     writer.goto(-15*length,-150)
     writer.seth(0)
-    for i in letters_is_known:
+    for i in letters:
         if i == (" "):
             writer.penup()
             writer.forward(30)
         else:
-            writer.penup()
-            writer.forward(10)
             writer.pendown()
             writer.forward(20)
+            writer.penup()
+            writer.forward(10)
 
 # draws the part of the hangman representing the ith wrong guess, from zero
 def draw_body_part(i):
