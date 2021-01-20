@@ -17,7 +17,7 @@ def get_word(is_multiplayer, length):
             wipe_shown_word()
     else:
         while True:
-            word = pick_random_word()
+            word = pick_random_word().strip()
             i = 0
             for c in word:
                 if (c.isalpha()):
@@ -58,7 +58,7 @@ def play_game(multiplayer_mode, length):
         if (not letter.lower() in word.lower()):
             # incorrect
             draw_body_part(incorrect_guesses)
-            add_to_red_list(incorrect_guesses)
+            add_to_red_list(letter)
             incorrect_guesses = incorrect_guesses + 1
         else:
             # correct
