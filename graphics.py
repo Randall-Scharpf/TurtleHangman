@@ -9,7 +9,7 @@ def display_word(word):
     for i in letters:
         writer.pencolor("black")
         writer.penup()
-        writer.setpos((-15*len(word))+(i*30), -150)
+        writer.setpos((-15*len(word))+(letters.index(i)*30), -150)
         writer.pendown()
         writer.write(i)
 
@@ -83,7 +83,11 @@ def add_to_red_list(letter):
 
 # draws the letter on the space with the index requested
 def fill_in_letter_at(i, letter):
-    print("TODO")
+    writer.penup()
+    writer.goto(-15 * len(word) - 5,-150)
+    writer.pendown()
+    writer.pencolor("black")
+    writer.write(letter)
 
 # opens the interface and draws the initial picture, which is just a place to hang the man
 def draw_hanger():
