@@ -6,11 +6,10 @@ hangman.ht()
 # draw the blank lines, the spaces between them, and the letters for the word instructed
 def display_word(word):
     letters = list(word)
-    length=len(word)
     for i in letters:
         writer.pencolor("black")
         writer.penup()
-        writer.setpos(-15*length, -150)
+        writer.setpos((-15*len(word))+(i*30), -150)
         writer.pendown()
         writer.write(i)
 
