@@ -17,7 +17,7 @@ def display_word(word):
 # erase the blank lines, any letters atop them, and any body parts or red letters drawn
 def wipe_shown_word():
     writer.clear()
-    writer.clear()
+    hangman.clear()
     draw_hanger()
 
 times_wrong = 0
@@ -41,6 +41,8 @@ def setup_game(word):
         else:
             writer.pendown()
             writer.forward(20)
+            writer.penup()
+            writer.forward(10)
         i = i + 1
 
 # draws the part of the writer representing the ith wrong guess, from zero
