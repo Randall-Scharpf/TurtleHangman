@@ -1,2 +1,5 @@
 __pycache__
+*.bat
+*.ico
+*.lnk
 debug.py
