@@ -5,13 +5,14 @@ writer.ht()
 hangman.ht()
 # draw the blank lines, the spaces between them, and the letters for the word instructed
 def display_word(word):
-    letters = list(word)
-    for i in letters:
-        writer.pencolor("black")
+    writer.pencolor("black")
+    i = 0
+    for letter in word:
         writer.penup()
-        writer.setpos((-15*len(word))+(letters.index(i)*30), -150)
+        writer.setpos((-15*len(word))+(i*30), -150)
         writer.pendown()
-        writer.write(i)
+        writer.write(letter)
+        i = i + 1
 
 # erase the blank lines, any letters atop them, and any body parts or red letters drawn
 def wipe_shown_word():
