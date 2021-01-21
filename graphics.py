@@ -3,15 +3,17 @@ writer=trtl.Turtle()
 hangman=trtl.Turtle()
 writer.ht()
 hangman.ht()
+style = ('Arial', 20, 'bold')
 # draw the blank lines, the spaces between them, and the letters for the word instructed
 def display_word(word):
+    setup_game(word)
     writer.pencolor("black")
     i = 0
-    for letter in word:
+    for letter in word.upper():
         writer.penup()
         writer.setpos((-15*len(word))+(i*30), -150)
         writer.pendown()
-        writer.write(letter)
+        writer.write(letter, font=style, align='center')
         i = i + 1
 
 # erase the blank lines, any letters atop them, and any body parts or red letters drawn
@@ -24,6 +26,7 @@ times_wrong = 0
 def setup_game(word):
     global times_wrong
     times_wrong = 0
+    writer.pencolor("black")
     writer.penup()
     writer.goto(-15 * len(word) - 5,-150)
     writer.seth(0)
@@ -96,17 +99,16 @@ def add_to_red_list(letter):
     times_wrong = times_wrong + 1
     writer.penup()
     writer.pencolor("red")
-    writer.pensize(100)
     writer.setpos(-200 + 30*(times_wrong), 190)
-    writer.write(letter)
+    writer.write(letter, font=style, align='center')
 
 # draws the letter on the space with the index requested
 def fill_in_letter_at(i, letter, word):
     writer.penup()
-    writer.goto(((-15*len(word)) + i*30) ,-150)
+    writer.goto(((-15*len(word)) + i*30 + 5) ,-155)
     writer.pendown()
     writer.pencolor("black")
-    writer.write(letter)
+    writer.write(letter, font=style, align='center')
 
 # opens the interface and draws the initial picture, which is just a place to hang the man
 def draw_hanger():
