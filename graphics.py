@@ -1,8 +1,11 @@
 import turtle as trtl
 writer=trtl.Turtle()
 hangman=trtl.Turtle()
+hangman.screen.setup(startx=700, starty=50)
 writer.ht()
+writer.speed(10)
 hangman.ht()
+hangman.speed(10)
 writer.pensize(5)
 hangman.pensize(5)
 style = ('Arial', 20, 'bold')
@@ -13,7 +16,7 @@ def display_word(word):
     i = 0
     for letter in word.upper():
         writer.penup()
-        writer.setpos((-15*len(word))+(i*30) + 5 , -145)
+        writer.setpos((-15*len(word))+(i*30) - 35 , -95)
         writer.pendown()
         writer.write(letter, font=style, align='center')
         i = i + 1
@@ -32,7 +35,7 @@ def setup_game(word):
     times_wrong = 0
     writer.pencolor("black")
     writer.penup()
-    writer.goto(-15 * len(word) - 5,-145)
+    writer.goto(-15 * len(word) - 45,-95)
     writer.seth(0)
     letters = list(word)
     i = 0
@@ -42,7 +45,7 @@ def setup_game(word):
         if not letter.isalpha():
             fill_in_letter_at(i, letter, word)
             writer.penup()
-            writer.goto((-15 * len(word) - 5 + 30*i),-145)
+            writer.goto((-15 * len(word) - 45 + 30*i),-95)
             writer.forward(30)
         else:
             writer.pendown()
@@ -54,11 +57,13 @@ def setup_game(word):
 # draws the part of the writer representing the ith wrong guess, from zero
 def draw_body_part(i):
     if i == 0:
+        hangman.speed(0)
         hangman.seth(0)
         hangman.penup()
         hangman.goto(-100,100)
         hangman.pendown()
         hangman.circle(20)
+        hangman.speed(10)
     if i == 1:
         hangman.right(90)
         hangman.forward(30)
@@ -80,6 +85,8 @@ def draw_body_part(i):
         hangman.right(130)
         hangman.forward(20)
     if i == 6:
+        hangman.speed(0)
+
         hangman.penup()
         hangman.goto(-90, 120)
         hangman.pendown()
@@ -91,6 +98,8 @@ def draw_body_part(i):
         hangman.pendown()
         hangman.seth(270)
         hangman.circle(2)
+
+        hangman.speed(10)
     if i == 7:
         hangman.penup()
         hangman.goto(-105,110)
@@ -110,7 +119,7 @@ def add_to_red_list(letter):
 # draws the letter on the space with the index requested
 def fill_in_letter_at(i, letter, word):
     writer.penup()
-    writer.goto(((-15*len(word)) + i*30 + 5) ,-145)
+    writer.goto(((-15*len(word)) + i*30 + -35) ,-95)
     writer.pendown()
     writer.pencolor("black")
     writer.write(letter, font=style, align='center')

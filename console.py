@@ -83,7 +83,9 @@ def ask_number_letters():
             return 0
         try:
             value = int(line)
-            if (value > 3):
+            if (value > 12):
+                print("Sorry, I don't have any words that long to pick from. The longest words I have are 12 letters long.")
+            elif (value > 3):
                 return value
             else:
                 print("A word with which hangman is to be played must be at least 4 letters long.")

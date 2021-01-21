@@ -64,15 +64,6 @@ def play_game(multiplayer_mode, length):
             # correct
             fill_in_letter(letter, word)
 
-        # DEBUGGING, TO BE REMOVED
-        status = "REMOVE THIS ONCE INTERFACE IS DONE | "
-        for x in range(length):
-            if letters_is_known[x]:
-                status = status + word[x]
-            else:
-                status = status + "_"
-        print(status)
-
         # end conditions
 
         if (incorrect_guesses == 8):
