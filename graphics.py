@@ -44,33 +44,33 @@ def setup_game(word):
 
 # draws the part of the writer representing the ith wrong guess, from zero
 def draw_body_part(i):
-    if i == 1:
+    if i == 0:
         hangman.seth(0)
         hangman.penup()
         hangman.goto(-100,100)
         hangman.pendown()
         hangman.circle(20)
-    if i == 2:
+    if i == 1:
         hangman.right(90)
         hangman.forward(30)
-    if i == 3:
+    if i == 2:
         hangman.right(30)
         hangman.forward(20)
-    if i == 4:
+    if i == 3:
         hangman.goto(-100,70)
         hangman.left(60)
         hangman.forward(20)
-    if i == 5:
+    if i == 4:
         hangman.penup()
         hangman.goto(-100,90)
         hangman.pendown()
         hangman.left(40)
         hangman.forward(20)
-    if i == 6:
+    if i == 5:
         hangman.goto(-100,90)
         hangman.right(130)
         hangman.forward(20)
-    if i== 7:
+    if i == 6:
         hangman.penup()
         hangman.goto(-90, 120)
         hangman.pendown()
@@ -82,7 +82,7 @@ def draw_body_part(i):
         hangman.pendown()
         hangman.seth(270)
         hangman.circle(2)
-    if i == 8:
+    if i == 7:
         hangman.penup()
         hangman.goto(-105,105)
         hangman.pendown()
@@ -95,7 +95,8 @@ def add_to_red_list(letter):
     times_wrong = times_wrong + 1
     writer.penup()
     writer.pencolor("red")
-    writer.setpos(-200 * (times_wrong - 1), 0)
+    writer.pensize(100)
+    writer.setpos(-200 + 30*(times_wrong), 190)
     writer.write(letter)
 
 # draws the letter on the space with the index requested
