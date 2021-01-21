@@ -17,8 +17,6 @@ def display_word(word):
 # erase the blank lines, any letters atop them, and any body parts or red letters drawn
 def wipe_shown_word():
     writer.clear()
-    hangman.clear()
-    draw_hanger()
 
 times_wrong = 0
 
@@ -47,31 +45,50 @@ def setup_game(word):
 
 # draws the part of the writer representing the ith wrong guess, from zero
 def draw_body_part(i):
-    if i == 1:
+    if i == 0:
+        hangman.seth(0)
         hangman.penup()
         hangman.goto(-100,100)
         hangman.pendown()
-        hangman.circle(50)
-    if i == 2:
+        hangman.circle(20)
+    if i == 1:
         hangman.right(90)
         hangman.forward(30)
-    if i == 3:
+    if i == 2:
         hangman.right(30)
         hangman.forward(20)
-    if i == 4:
+    if i == 3:
         hangman.goto(-100,70)
         hangman.left(60)
         hangman.forward(20)
-    if i == 5:
+    if i == 4:
         hangman.penup()
         hangman.goto(-100,90)
         hangman.pendown()
         hangman.left(40)
         hangman.forward(20)
-    if i == 6:
+    if i == 5:
         hangman.goto(-100,90)
         hangman.right(130)
         hangman.forward(20)
+    if i == 6:
+        hangman.penup()
+        hangman.goto(-90, 120)
+        hangman.pendown()
+        hangman.seth(90)
+        hangman.circle(2)
+
+        hangman.penup()
+        hangman.goto(-110,120)
+        hangman.pendown()
+        hangman.seth(270)
+        hangman.circle(2)
+    if i == 7:
+        hangman.penup()
+        hangman.goto(-105,105)
+        hangman.pendown()
+        hangman.seth(0)
+        hangman.forward(10)
 
 # draws the letter with the other red, incorrect, used letters
 def add_to_red_list(letter):
@@ -79,13 +96,14 @@ def add_to_red_list(letter):
     times_wrong = times_wrong + 1
     writer.penup()
     writer.pencolor("red")
-    writer.setpos(-200 * (times_wrong - 1), 0)
+    writer.pensize(100)
+    writer.setpos(-200 + 30*(times_wrong), 190)
     writer.write(letter)
 
 # draws the letter on the space with the index requested
 def fill_in_letter_at(i, letter, word):
     writer.penup()
-    writer.goto(-15 * len(word) - 5,-150)
+    writer.goto(((-15*len(word)) + i*30) ,-150)
     writer.pendown()
     writer.pencolor("black")
     writer.write(letter)
@@ -100,8 +118,8 @@ def draw_hanger():
     hangman.forward(200)
     hangman.setpos(0,0)
     hangman.seth(90)
-    hangman.forward(250)
+    hangman.forward(170)
     hangman.seth(180)
     hangman.forward(100)
     hangman.seth(270)
-    hangman.forward(50)
+    hangman.forward(30)

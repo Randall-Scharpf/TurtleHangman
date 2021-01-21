@@ -75,7 +75,7 @@ def play_game(multiplayer_mode, length):
 
         # end conditions
 
-        if (incorrect_guesses == 6):
+        if (incorrect_guesses == 8):
             display_word(word)
             if(multiplayer_mode):
                 player_two_wins()
