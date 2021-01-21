@@ -6,18 +6,17 @@ hangman.ht()
 # draw the blank lines, the spaces between them, and the letters for the word instructed
 def display_word(word):
     letters = list(word)
-    length=len(word)
     for i in letters:
         writer.pencolor("black")
         writer.penup()
-        writer.setpos(-15*length, -150)
+        writer.setpos((-15*len(word))+(letters.index(i)*30), -150)
         writer.pendown()
         writer.write(i)
 
 # erase the blank lines, any letters atop them, and any body parts or red letters drawn
 def wipe_shown_word():
     writer.clear()
-    writer.clear()
+    hangman.clear()
     draw_hanger()
 
 times_wrong = 0
@@ -32,15 +31,17 @@ def setup_game(word):
     letters = list(word)
     i = 0
     for letter in letters:
-        if i + 1 == len(word):
+        if i == len(word):
             return
         if not letter.isalpha():
             writer.penup()
             writer.forward(30)
-            fill_in_letter_at(i, letter)
+            fill_in_letter_at(i, letter, word)
         else:
             writer.pendown()
             writer.forward(20)
+            writer.penup()
+            writer.forward(10)
         i = i + 1
 
 # draws the part of the writer representing the ith wrong guess, from zero
@@ -81,8 +82,12 @@ def add_to_red_list(letter):
     writer.write(letter)
 
 # draws the letter on the space with the index requested
-def fill_in_letter_at(i, letter):
-    print("TODO")
+def fill_in_letter_at(i, letter, word):
+    writer.penup()
+    writer.goto(-15 * len(word) - 5,-150)
+    writer.pendown()
+    writer.pencolor("black")
+    writer.write(letter)
 
 # opens the interface and draws the initial picture, which is just a place to hang the man
 def draw_hanger():
