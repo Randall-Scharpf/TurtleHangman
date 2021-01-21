@@ -3,6 +3,8 @@ writer=trtl.Turtle()
 hangman=trtl.Turtle()
 writer.ht()
 hangman.ht()
+writer.pensize(5)
+hangman.pensize(5)
 style = ('Arial', 20, 'bold')
 # draw the blank lines, the spaces between them, and the letters for the word instructed
 def display_word(word):
@@ -11,7 +13,7 @@ def display_word(word):
     i = 0
     for letter in word.upper():
         writer.penup()
-        writer.setpos((-15*len(word))+(i*30), -150)
+        writer.setpos((-15*len(word))+(i*30) + 5 , -145)
         writer.pendown()
         writer.write(letter, font=style, align='center')
         i = i + 1
@@ -19,6 +21,8 @@ def display_word(word):
 # erase the blank lines, any letters atop them, and any body parts or red letters drawn
 def wipe_shown_word():
     writer.clear()
+    hangman.clear()
+    draw_hanger()
 
 times_wrong = 0
 
@@ -28,7 +32,7 @@ def setup_game(word):
     times_wrong = 0
     writer.pencolor("black")
     writer.penup()
-    writer.goto(-15 * len(word) - 5,-150)
+    writer.goto(-15 * len(word) - 5,-145)
     writer.seth(0)
     letters = list(word)
     i = 0
@@ -36,9 +40,10 @@ def setup_game(word):
         if i == len(word):
             return
         if not letter.isalpha():
-            writer.penup()
-            writer.forward(30)
             fill_in_letter_at(i, letter, word)
+            writer.penup()
+            writer.goto((-15 * len(word) - 5 + 30*i),-145)
+            writer.forward(30)
         else:
             writer.pendown()
             writer.forward(20)
@@ -88,7 +93,7 @@ def draw_body_part(i):
         hangman.circle(2)
     if i == 7:
         hangman.penup()
-        hangman.goto(-105,105)
+        hangman.goto(-105,110)
         hangman.pendown()
         hangman.seth(0)
         hangman.forward(10)
@@ -105,7 +110,7 @@ def add_to_red_list(letter):
 # draws the letter on the space with the index requested
 def fill_in_letter_at(i, letter, word):
     writer.penup()
-    writer.goto(((-15*len(word)) + i*30 + 5) ,-155)
+    writer.goto(((-15*len(word)) + i*30 + 5) ,-145)
     writer.pendown()
     writer.pencolor("black")
     writer.write(letter, font=style, align='center')
